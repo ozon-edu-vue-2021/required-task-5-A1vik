@@ -1,22 +1,20 @@
 <template>
   <header class="main-header">
-    <router-link to="/" class="main-header__logo main-header__link">
+    <router-link :to="routes.root" class="main-header__logo main-header__link">
       Market
     </router-link>
     <ul class="main-header__menu menu">
-      <li class="menu__item">
-        <router-link to="/" class="main-header__link">
-          Главная
-        </router-link>
-      </li>
-      <li class="menu__item">
-        <router-link to="/favorites" class="main-header__link">
-          Избранное
+      <li class="menu__item" v-for="item in menu" :key="item.name">
+        <router-link :to="item.link" class="main-header__link">
+          {{ item.name }}
         </router-link>
       </li>
     </ul>
     <div class="main-header__cart">
-      <router-link to="/cart" class="main-header__cart-link main-header__link">
+      <router-link
+        :to="routes.cart"
+        class="main-header__cart-link main-header__link"
+      >
         {{ cartCount }}
         <cart-icon class="main-header__cart-icon" />
         Корзина
@@ -26,18 +24,36 @@
 </template>
 
 <script>
-import CartIcon from "@/assets/images/cart.svg";
+import { routes } from "@/router/routes.js";
 import { mapGetters } from "vuex";
+import CartIcon from "@/assets/images/cart.svg";
 
 export default {
   name: "AppHeader",
   components: {
-     CartIcon,
+    CartIcon,
+  },
+  data() {
+    return {
+      routes
+    }
   },
   computed: {
-    ...mapGetters("cart", ["getTotalCount"]),
+    ...mapGetters("cart", { totalCount: "getTotalCount" }),
     cartCount() {
-      return this.getTotalCount > 0 ? this.getTotalCount : '';
+      return this.totalCount > 0 ? this.totalCount : '';
+    },
+    menu() {
+      return [
+        {
+          link: this.routes.root,
+          name: "Главная"
+        },
+        {
+          link: this.routes.favorites,
+          name: "Избранное"
+        },
+      ]
     }
   }
 }

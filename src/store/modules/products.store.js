@@ -1,4 +1,4 @@
-import { getRandomInRange } from "../../helpers";
+import { getRandomNumber } from "../../helpers";
 import { TOGGLE_FAVORITES, SET_PRODUCTS } from "../mutation-types";
 
 const state = {
@@ -10,8 +10,8 @@ const actions = {
     const res = await fetch("https://random-data-api.com/api/food/random_food?size=30");
     const data = await res.json();
     const products = data.map((product) => {
-      product.price = getRandomInRange(50, 2000);
-      product.image = getRandomInRange(0, 11) + 1;
+      product.price = getRandomNumber(50, 2000);
+      product.image = getRandomNumber(0, 11) + 1;
       product.isFavorite = false;
       return product;
     });

@@ -19,7 +19,6 @@ export default {
   name: "Home",
   computed: {
     ...mapGetters("products", ["allProducts"]),
-    ...mapGetters("cart", ["getTotalCount"]),
     isShowProducts() {
       return this.allProducts.length > 0;
     },

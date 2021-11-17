@@ -18,7 +18,6 @@ export default {
   },
   computed: {
     ...mapGetters("products", ["favoriteProducts"]),
-    ...mapGetters("cart", ["getTotalCount"]),
     isShowProducts() {
       return this.favoriteProducts.length > 0;
     },

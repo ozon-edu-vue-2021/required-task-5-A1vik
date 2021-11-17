@@ -2,23 +2,24 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
 import Cart from "@/views/Cart.vue";
-import Favorites from '@/views/Favorites.vue';
+import Favorites from "@/views/Favorites.vue";
+import { routes as routerLinks } from "@/router/routes";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: routerLinks.root,
     name: "Home",
     component: Home,
   },
   {
-    path: "/cart",
+    path: routerLinks.cart,
     name: "Cart",
     component: Cart,
   },
   {
-    path: "/favorites",
+    path: routerLinks.favorites,
     name: "Favorites",
     component: Favorites,
   },
